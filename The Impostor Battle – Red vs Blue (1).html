@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Impostor Battle – Red vs Blue</title>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#d9cfb6;--fg:#1c1a16;--card:#f1e8d0;--mut:#5b5340;--red:#b3202f;--blue:#1f4fb8;--cy:#7d5200;--st:#a3182a;--line:#b3a57f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0f12;--fg:#e9e4d4;--card:#1a1c21;--mut:#a39d8a;--red:#ff5a6a;--blue:#6f9bff;--cy:#f0b44c;--st:#ff6b5e;--line:#34363d}}
+:root[data-theme="dark"]{--bg:#0e0f12;--fg:#e9e4d4;--card:#1a1c21;--mut:#a39d8a;--red:#ff5a6a;--blue:#6f9bff;--cy:#f0b44c;--st:#ff6b5e;--line:#34363d}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:radial-gradient(ellipse at 50% -10%,rgba(240,180,76,.14),transparent 60%),repeating-linear-gradient(0deg,rgba(0,0,0,.04) 0 1px,transparent 1px 4px),var(--bg);color:var(--fg);font:16px/1.55 "Courier Prime","Courier New",monospace;display:flex;flex-direction:column}
+#deck{flex:1;min-height:0;overflow-y:auto}
+.s{display:none;max-width:1080px;margin:0 auto;padding:clamp(20px,4vw,44px) clamp(16px,5vw,56px)}
+.s.on{display:block}
+h1,h2{font-family:"Special Elite","Courier New",monospace;font-weight:400;line-height:1.05;margin:0 0 12px;text-transform:uppercase;letter-spacing:.02em}
+h1{font-size:clamp(44px,10vw,100px)}
+h2{font-size:clamp(26px,4.6vw,44px)}
+h3{margin:0 0 6px;font-size:18px}
+p{margin:0 0 10px;max-width:62ch}
+.lead{font-size:clamp(18px,2.4vw,24px);color:var(--mut)}
+.stamp{display:inline-block;font-family:"Special Elite","Courier New",monospace;border:3px double var(--st);color:var(--st);padding:2px 12px;transform:rotate(-3deg);letter-spacing:.18em;font-size:14px;margin-bottom:16px}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:20px}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:3px 14px 3px 3px;padding:20px 16px 16px;box-shadow:4px 5px 0 var(--line)}
+.card::after{content:"";position:absolute;top:-8px;left:18px;width:54px;height:16px;background:var(--cy);opacity:.35;transform:rotate(-2deg)}
+.step b{font-family:"Special Elite","Courier New",monospace;font-weight:400;font-size:32px;color:var(--cy);display:block;line-height:1}
+.hook{border-left:6px solid var(--cy);border-radius:3px 14px 14px 3px;padding:14px 18px;margin-top:24px;background:var(--card);max-width:680px}
+ul{margin:0;padding:0;list-style:none}
+li{padding:5px 0;border-top:1px dashed var(--line)}
+li::before{content:"▸ ";color:var(--cy)}
+.chip{display:inline-block;padding:2px 10px;border:1px dashed var(--cy);border-radius:3px;margin:3px 3px 3px 0;font-size:15px}
+.rq,#wn{background:var(--cy);color:var(--bg);border:0;border-radius:3px;padding:9px 16px;font:inherit;font-weight:700;cursor:pointer;margin-top:12px}
+.qo{margin-top:10px;font-size:20px;font-weight:700;min-height:62px}
+details{margin-top:22px}
+summary{display:inline-block;cursor:pointer;list-style:none;font-weight:700;letter-spacing:.08em;padding:6px 14px;background:var(--fg);color:var(--bg);border-radius:3px}
+summary::-webkit-details-marker{display:none}
+details p{margin-top:12px}
+details .chip{font-size:20px;padding:4px 14px}
+.rd{border-top:5px solid var(--cy)}
+#wo{font-family:"Special Elite","Courier New",monospace;font-size:clamp(20px,3.5vw,32px);margin-top:14px;min-height:40px}
+nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:8px 14px;border-top:2px dashed var(--line);background:var(--bg)}
+button{font:inherit}
+nav button{background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:3px;padding:8px 14px;cursor:pointer;min-width:44px;font-weight:700}
+nav #nx{background:var(--fg);color:var(--bg)}
+nav .sm{padding:4px 10px;min-width:36px}
+.sc{display:flex;align-items:center;gap:6px;font-weight:700}
+.sc b{min-width:26px;text-align:center;font-size:20px}
+.r{color:var(--red)}.b{color:var(--blue)}
+button:focus-visible,summary:focus-visible{outline:3px solid var(--cy);outline-offset:2px}
+#ct{color:var(--mut);font-size:14px}
+</style>
+</head>
+<body>
+<main id="deck">
+
+<section class="s on">
+<div class="stamp">CLASSIFIED</div>
+<h1><span class="r">Red</span> vs <span class="b">Blue</span></h1>
+<h2>🕵️ The Impostor Battle</h2>
+<p class="lead">Two teams of 15. Four impostors hide in each team. Three rounds. English only.</p>
+</section>
+
+<section class="s">
+<div class="stamp">TOP SECRET</div>
+<h2>Rules of the battle</h2>
+<div class="g">
+<div class="card step"><b>1</b><h3>Get your card</h3><p>Each team gets its own secret word from the round's theme. 11 players see the word. The 4 impostors only see "???".</p></div>
+<div class="card step"><b>2</b><h3>Talk in English</h3><p>Ask and answer questions with your team. Never say the secret word! Impostors must sound like they know it.</p></div>
+<div class="card step"><b>3</b><h3>Race to finish</h3><p>Your team finishes the round in one of two ways, and the first team to finish wins.</p><p><b>A.</b> The impostors guess the secret word.<br><b>B.</b> The crew finds all 4 impostors.</p></div>
+<div class="card step"><b>4</b><h3>Limits and penalties</h3><p>8 minutes per round. Only the captain accuses. A wrong accusation means 15 seconds of silence. A wrong word guess reveals that impostor.</p></div>
+</div>
+<div class="hook"><h3>Points</h3><p>First team to finish: +3. The other team: +1 for each impostor it found. Spot an impostor by vague answers ("It's good"), repeated words, long pauses and Spanish.</p></div>
+</section>
+
+<section class="s">
+<div class="stamp">CASE FILE 01</div>
+<h2>Round 1: Food 🍕</h2>
+<p class="lead">Is your teammate really eating the same thing as you?</p>
+<div class="g">
+<div class="card rd"><h3>Questions to ask</h3>
+<ul><li>Is it sweet, salty, sour or spicy?</li><li>Do you eat it hot or cold?</li><li>Is it for breakfast, lunch or dinner?</li><li>What color is it?</li><li>Do you eat it with your hands?</li><li>Where can you buy it?</li></ul>
+<button class="rq">🎲 Random question</button><div class="qo"></div></div>
+<div class="card rd"><h3>Words to listen for</h3>
+<span class="chip">crunchy</span><span class="chip">juicy</span><span class="chip">creamy</span><span class="chip">fried</span><span class="chip">baked</span><span class="chip">fresh</span><span class="chip">sauce</span><span class="chip">snack</span><span class="chip">delicious</span><span class="chip">dessert</span>
+<p style="margin-top:10px">Real players give details. Impostors use only general words like "good" or "nice".</p></div>
+</div>
+<details><summary>🔒 Secret word</summary><p><span class="chip">tacos</span><span class="chip">burritos</span><span class="chip">sandwich</span><span class="chip">torta</span></p></details>
+</section>
+
+<section class="s">
+<div class="stamp">CASE FILE 02</div>
+<h2>Round 2: Animals 🐾</h2>
+<p class="lead">Who knows this animal, and who is only guessing?</p>
+<div class="g">
+<div class="card rd"><h3>Questions to ask</h3>
+<ul><li>Where does it live?</li><li>How many legs does it have?</li><li>Is it big or small?</li><li>What does it eat?</li><li>Can it fly, swim or run fast?</li><li>Would you keep it as a pet?</li></ul>
+<button class="rq">🎲 Random question</button><div class="qo"></div></div>
+<div class="card rd"><h3>Words to listen for</h3>
+<span class="chip">wings</span><span class="chip">fur</span><span class="chip">tail</span><span class="chip">claws</span><span class="chip">wild</span><span class="chip">farm</span><span class="chip">ocean</span><span class="chip">forest</span><span class="chip">predator</span><span class="chip">pet</span>
+<p style="margin-top:10px">Listen for "because". Real players explain their answers. Impostors copy the last person.</p></div>
+</div>
+<details><summary>🔒 Secret word</summary><p><span class="chip">shark</span><span class="chip">dolphin</span><span class="chip">horse</span><span class="chip">donkey</span></p></details>
+</section>
+
+<section class="s">
+<div class="stamp">CASE FILE 03</div>
+<h2>Round 3: Objects 🎒</h2>
+<p class="lead">Last round. Every detail counts.</p>
+<div class="g">
+<div class="card rd"><h3>Questions to ask</h3>
+<ul><li>Where do you usually find it?</li><li>What is it made of?</li><li>Do you use it every day?</li><li>Is it bigger than a backpack?</li><li>Does it need electricity or batteries?</li><li>Who uses it the most?</li></ul>
+<button class="rq">🎲 Random question</button><div class="qo"></div></div>
+<div class="card rd"><h3>Words to listen for</h3>
+<span class="chip">plastic</span><span class="chip">metal</span><span class="chip">battery</span><span class="chip">screen</span><span class="chip">handle</span><span class="chip">heavy</span><span class="chip">pocket</span><span class="chip">kitchen</span><span class="chip">school</span><span class="chip">useful</span>
+<p style="margin-top:10px">Ask follow-up questions: "Why do you say that?" Impostors struggle with the second question.</p></div>
+</div>
+<details><summary>🔒 Secret word</summary><p><span class="chip">glasses</span><span class="chip">binoculars</span><span class="chip">tablet</span><span class="chip">television</span></p></details>
+</section>
+
+<section class="s">
+<div class="stamp">CASE CLOSED</div>
+<h2>Final feedback</h2>
+<p class="lead">Check the scoreboard and reveal the winner.</p>
+<button id="wn">🏆 Show the winner</button><div id="wo"></div>
+<div class="g">
+<div class="card rd"><h3>Awards</h3><span class="chip">Best Detective</span><span class="chip">Best Bluffer</span><span class="chip">Best English</span><span class="chip">Team Spirit</span><p style="margin-top:10px">Exit ticket: "Next time, I will…"</p></div>
+</div>
+</section>
+
+</main>
+<nav>
+<button id="pv" aria-label="Previous slide">←</button>
+<div class="sc"><span class="r">Red</span><button class="sm" data-t="r" data-d="-1" aria-label="Red minus one">−</button><b id="sr">0</b><button class="sm" data-t="r" data-d="1" aria-label="Red plus one">+</button>
+<span class="b" style="margin-left:10px">Blue</span><button class="sm" data-t="b" data-d="-1" aria-label="Blue minus one">−</button><b id="sb">0</b><button class="sm" data-t="b" data-d="1" aria-label="Blue plus one">+</button></div>
+<button id="tm" aria-label="Start or reset the 8 minute timer">⏱ 8:00</button>
+<span id="ct"></span>
+<button id="nx" aria-label="Next slide">→</button>
+</nav>
+<script>
+const S=[...document.querySelectorAll('.s')],ct=document.getElementById('ct'),dk=document.getElementById('deck'),sc={r:0,b:0};let i=0;
+function go(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach((s,k)=>s.classList.toggle('on',k===i));ct.textContent=(i+1)+' / '+S.length;dk.scrollTop=0}
+pv.onclick=()=>go(i-1);nx.onclick=()=>go(i+1);go(0);
+addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='PageDown')go(i+1);if(e.key==='ArrowLeft'||e.key==='PageUp')go(i-1)});
+let x0=null;dk.addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true});
+dk.addEventListener('touchend',e=>{if(x0===null)return;const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>70)go(i+(d<0?1:-1));x0=null});
+document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{const k=b.dataset.t;sc[k]=Math.max(0,sc[k]+ +b.dataset.d);sr.textContent=sc.r;sb.textContent=sc.b});
+document.querySelectorAll('.rq').forEach(b=>b.onclick=()=>{const l=[...b.parentNode.querySelectorAll('li')];b.nextElementSibling.textContent=l[Math.floor(Math.random()*l.length)].textContent});
+wn.onclick=()=>{wo.textContent=sc.r>sc.b?'🏆 Red Team wins, '+sc.r+' to '+sc.b+'!':sc.b>sc.r?'🏆 Blue Team wins, '+sc.b+' to '+sc.r+'!':"🤝 It's a tie, "+sc.r+' to '+sc.b+'!'};
+let t,run=false,c=480;const fm=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+tm.onclick=()=>{clearInterval(t);if(run){run=false;tm.textContent='⏱ 8:00';return}run=true;c=480;tm.textContent='⏱ '+fm(c);t=setInterval(()=>{c--;tm.textContent=c>0?'⏱ '+fm(c):"⏱ Time's up!";if(c<=0){clearInterval(t);run=false}},1000)};
+</script>
+</body>
+</html>
